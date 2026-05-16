@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#c2185b" />
+  <meta property="og:title" content="Hazte tu Mamografía Hoy" />
+  <meta property="og:description" content="Detectar a tiempo salva vidas. Agenda tu mamografía gratuita ahora." />
+  <title>Mamografía: Cuida tu Vida</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rosa:    #d81b60;
+      --rosa2:   #f06292;
+      --rosa3:   #fce4ec;
+      --crema:   #fff8f0;
+      --oscuro:  #1a0a10;
+      --gris:    #5d4555;
+      --blanco:  #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--crema);
+      color: var(--oscuro);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(145deg, #880e4f 0%, #c2185b 45%, #f48fb1 100%);
+      padding: 60px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,.12) 0%, transparent 60%);
+    }
+    .hero-ribbon {
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 160px; height: 160px;
+      opacity: .18;
+    }
+    .hero-ribbon svg { width: 100%; height: 100%; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.22);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,.35);
+      margin-bottom: 20px;
+      backdrop-filter: blur(6px);
+      animation: fadeDown .6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      animation: fadeDown .7s .1s ease both;
+    }
+    .hero h1 span { color: #ffd6e7; }
+
+    .hero p {
+      color: rgba(255,255,255,.88);
+      font-size: clamp(.95rem, 3.5vw, 1.1rem);
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 32px;
+      font-weight: 300;
+      animation: fadeDown .8s .2s ease both;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: #fff;
+      color: var(--rosa);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(0,0,0,.22);
+      transition: transform .2s, box-shadow .2s;
+      animation: fadeDown .9s .3s ease both;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.28); }
+    .btn-cta:active { transform: scale(.97); }
+
+    /* ── WAVE ── */
+    .wave { display: block; margin-top: -2px; }
+
+    /* ── STATS BAR ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--rosa);
+      padding: 0;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 20px 10px;
+      color: #fff;
+      border-right: 1px solid rgba(255,255,255,.2);
+    }
+    .stat:last-child { border-right: none; }
+    .stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .stat span { font-size: .72rem; font-weight: 500; opacity: .85; letter-spacing: .04em; }
+
+    /* ── SECCIÓN GENERAL ── */
+    section { padding: 52px 22px; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rosa);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--rosa);
+      border-radius: 2px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    /* ── POR QUÉ ── */
+    .porque { background: var(--blanco); }
+    .porque p { color: var(--gris); line-height: 1.75; font-size: .97rem; margin-bottom: 24px; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .card {
+      background: var(--rosa3);
+      border-radius: 18px;
+      padding: 22px 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: rgba(216,27,96,.08);
+    }
+    .card-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .card h3 { font-size: .88rem; font-weight: 700; color: var(--rosa); line-height: 1.3; }
+
+    /* ── SÍNTOMAS ── */
+    .sintomas { background: #fff0f5; }
+    .sintomas-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .sintomas-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 2px 12px rgba(216,27,96,.06);
+    }
+    .sintomas-list li .icon {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      background: var(--rosa3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .sintomas-list li p { font-size: .9rem; color: var(--gris); line-height: 1.5; }
+    .sintomas-list li strong { display: block; font-size: .95rem; color: var(--oscuro); margin-bottom: 2px; }
+
+    /* ── PROCESO ── */
+    .proceso { background: var(--blanco); }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 24px; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 24px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rosa2), transparent);
+    }
+    .step {
+      display: flex;
+      gap: 20px;
+      padding: 0 0 28px 0;
+      position: relative;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--rosa);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+      box-shadow: 0 4px 16px rgba(216,27,96,.3);
+    }
+    .step-text h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .step-text p { font-size: .87rem; color: var(--gris); line-height: 1.5; }
+
+    /* ── MITOS ── */
+    .mitos { background: var(--oscuro); color: #fff; }
+    .mitos h2 { color: #fff; }
+    .mitos .section-label { color: var(--rosa2); }
+    .mitos .section-label::before { background: var(--rosa2); }
+    .mito-item {
+      margin-top: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .mito-falso {
+      background: rgba(255,255,255,.07);
+      padding: 16px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .mito-falso .tag {
+      flex-shrink: 0;
+      font-size: .68rem; font-weight: 800;
+      letter-spacing: .1em;
+      background: #c62828;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-top: 2px;
+    }
+    .mito-falso p { font-size: .9rem; color: rgba(255,255,255,.75); font-style: italic; }
+    .mito-verdad {
+      background: rgba(216,27,96,.25);
+      padding: 14px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .mito-verdad .tag {
+      flex-shrink: 0;
+      font-size: .68rem; font-weight: 800;
+      letter-spacing: .1em;
+      background: #2e7d32;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-top: 2px;
+    }
+    .mito-verdad p { font-size: .9rem; color: rgba(255,255,255,.9); }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      background: linear-gradient(135deg, #880e4f, #c2185b);
+      text-align: center;
+      padding: 60px 24px;
+      color: #fff;
+    }
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      margin-bottom: 14px;
+    }
+    .cta-final p { color: rgba(255,255,255,.82); font-size: .97rem; line-height: 1.6; margin-bottom: 32px; max-width: 340px; margin-left: auto; margin-right: auto; }
+    .btn-wsp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 30px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      margin-bottom: 14px;
+      transition: transform .2s;
+    }
+    .btn-wsp:hover { transform: translateY(-2px); }
+    .btn-llamar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.3);
+      transition: background .2s;
+    }
+    .btn-llamar:hover { background: rgba(255,255,255,.25); }
+    .btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--oscuro);
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      padding: 24px 20px;
+      font-size: .78rem;
+      line-height: 1.7;
+    }
+    footer strong { color: rgba(255,255,255,.7); }
+
+    /* ── RIBBON LAZO ── */
+    .lazo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .lazo {
+      width: 48px;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.08); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-ribbon">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="100" cy="100" r="60" stroke="white" stroke-width="1.5" fill="none" stroke-dasharray="8 6"/>
+    </svg>
+  </div>
+
+  <div class="lazo-wrap">
+    <!-- Lazo rosa SVG inline -->
+    <svg class="lazo" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 10 C20 10 5 30 5 50 C5 70 20 85 50 95 C80 85 95 70 95 50 C95 30 80 10 50 10Z"
+            fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <path d="M50 95 C45 105 47 118 50 125 C53 118 55 105 50 95Z"
+            fill="white"/>
+      <path d="M50 95 C35 102 20 100 15 95 C25 88 40 90 50 95Z" fill="white"/>
+      <path d="M50 95 C65 102 80 100 85 95 C75 88 60 90 50 95Z" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="badge">🎀 Salud de la Mujer</div>
+
+  <h1>Tu salud<br/><span>merece ser prioridad</span></h1>
+
+  <p>La mamografía detecta el cáncer de mama en etapas tempranas, cuando el tratamiento es más efectivo y las posibilidades de curación son mayores.</p>
+
+  <a href="#agendar" class="btn-cta">📅 Agenda tu cita ahora</a>
+</header>
+
+<!-- WAVE -->
+<svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;background:#c2185b;">
+  <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#fce4ec"/>
+</svg>
+
+<!-- ══════════ STATS ══════════ -->
+<div class="stats">
+  <div class="stat">
+    <strong>1 de 8</strong>
+    <span>mujeres tendrá cáncer de mama</span>
+  </div>
+  <div class="stat">
+    <strong>95%</strong>
+    <span>sobreviven si se detecta a tiempo</span>
+  </div>
+  <div class="stat">
+    <strong>40+</strong>
+    <span>años: hazte revisión anual</span>
+  </div>
+</div>
+
+<!-- ══════════ POR QUÉ ══════════ -->
+<section class="porque">
+  <div class="section-label">Por qué importa</div>
+  <h2>Detectar a tiempo<br/>cambia todo</h2>
+  <p>El cáncer de mama detectado en etapa temprana tiene una tasa de supervivencia superior al 95%. La mamografía es el estudio más efectivo para encontrarlo antes de que puedas sentirlo.</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🔬</span>
+      <h3>Detección 2 años antes de sentir síntomas</h3>
+    </div>
+    <div class="card">
+      <span class="card-icon">⏱️</span>
+      <h3>El estudio toma solo 15 minutos</h3>
+    </div>
+    <div class="card">
+      <span class="card-icon">💊</span>
+      <h3>Tratamientos menos agresivos si se detecta pronto</h3>
+    </div>
+    <div class="card">
+      <span class="card-icon">❤️</span>
+      <h3>Tranquilidad y control de tu salud</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SÍNTOMAS ══════════ -->
+<section class="sintomas">
+  <div class="section-label">Señales de alerta</div>
+  <h2>Señales que no debes ignorar</h2>
+
+  <ul class="sintomas-list">
+    <li>
+      <div class="icon">🔴</div>
+      <div>
+        <strong>Bulto o engrosamiento</strong>
+        <p>Cualquier masa nueva en el seno o axila que no desaparece.</p>
+      </div>
+    </li>
+    <li>
+      <div class="icon">🔵</div>
+      <div>
+        <strong>Cambios en la piel</strong>
+        <p>Enrojecimiento, hoyuelos o textura de piel de naranja.</p>
+      </div>
+    </li>
+    <li>
+      <div class="icon">🟡</div>
+      <div>
+        <strong>Secreción del pezón</strong>
+        <p>Especialmente si es sanguinolenta o sin apretar el seno.</p>
+      </div>
+    </li>
+    <li>
+      <div class="icon">🟠</div>
+      <div>
+        <strong>Cambio de forma o tamaño</strong>
+        <p>Asimetría nueva o hundimiento en alguna zona del seno.</p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════ PROCESO ══════════ -->
+<section class="proceso">
+  <div class="section-label">Cómo funciona</div>
+  <h2>El proceso es simple<br/>y sin complicaciones</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h3>Agenda tu cita</h3>
+        <p>Llámanos o escríbenos por WhatsApp. Te damos horario flexible.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h3>Llega al centro</h3>
+        <p>No necesitas preparación especial. Usa ropa cómoda en dos piezas.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h3>El estudio</h3>
+        <p>Dura solo 10–15 minutos. El equipo te acompañará en todo momento.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <h3>Recibe tus resultados</h3>
+        <p>Te entregamos el informe con interpretación médica incluida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MITOS ══════════ -->
+<section class="mitos">
+  <div class="section-label">Mitos y verdades</div>
+  <h2>No dejes que los mitos<br/>pongan en riesgo tu vida</h2>
+
+  <div class="mito-item">
+    <div class="mito-falso">
+      <span class="tag">MITO</span>
+      <p>"Si no tengo síntomas, no necesito mamografía."</p>
+    </div>
+    <div class="mito-verdad">
+      <span class="tag">VERDAD</span>
+      <p>El cáncer de mama en etapa inicial casi nunca duele. La mamografía detecta tumores hasta 2 años antes de que sean palpables.</p>
+    </div>
+  </div>
+
+  <div class="mito-item">
+    <div class="mito-falso">
+      <span class="tag">MITO</span>
+      <p>"Solo afecta a mujeres con antecedentes familiares."</p>
+    </div>
+    <div class="mito-verdad">
+      <span class="tag">VERDAD</span>
+      <p>El 85% de los casos ocurre en mujeres sin ningún familiar con la enfermedad. Todas las mujeres tienen riesgo.</p>
+    </div>
+  </div>
+
+  <div class="mito-item">
+    <div class="mito-falso">
+      <span class="tag">MITO</span>
+      <p>"La mamografía duele mucho y daña los tejidos."</p>
+    </div>
+    <div class="mito-verdad">
+      <span class="tag">VERDAD</span>
+      <p>Solo hay una ligera presión de segundos. La dosis de radiación es mínima y completamente segura.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA FINAL ══════════ -->
+<section class="cta-final" id="agendar">
+  <h2>🎀 Agenda hoy.<br/>Tu vida vale más.</h2>
+  <p>Nuestro equipo está listo para atenderte con calidez y profesionalismo. Sin largas esperas.</p>
+  <div class="btns">
+    <a href="https://wa.me/573000000000?text=Hola%2C%20quiero%20agendar%20mi%20mamograf%C3%ADa" class="btn-wsp">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C8.82 3 3 8.82 3 16c0 2.37.64 4.58 1.76 6.5L3 29l6.71-1.74A12.94 12.94 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-2.12 0-4.1-.57-5.81-1.57l-.42-.24-4 1.04 1.06-3.87-.27-.44A10.56 10.56 0 015.4 16c0-5.84 4.76-10.6 10.6-10.6S26.6 10.16 26.6 16 21.84 26.6 16 26.6zm5.8-7.92c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.72.16s-.82 1.03-1.01 1.24c-.18.21-.37.24-.69.08a8.63 8.63 0 01-2.54-1.57 9.5 9.5 0 01-1.76-2.19c-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.53-.72-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.1 1.08-1.1 2.62s1.13 3.04 1.28 3.25c.16.21 2.22 3.38 5.38 4.74.75.32 1.34.52 1.8.66.75.24 1.44.21 1.98.13.6-.09 1.87-.77 2.13-1.51.26-.74.26-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"/></svg>
+      Escribir por WhatsApp
+    </a>
+    <a href="tel:+573000000000" class="btn-llamar">
+      📞 Llamar ahora
+    </a>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <strong>Centro de Salud Femenina</strong><br/>
+  Tu bienestar es nuestra misión · Todos los derechos reservados<br/>
+  <small>Esta página es informativa. Consulta siempre con tu médico.</small>
+</footer>
+
+</body>
+</html>
